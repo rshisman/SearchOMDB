@@ -1,0 +1,19 @@
+.app-container {
+    height: 100%;
+    width: 100%;
+}
+
+.movies-container {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 80%;
+    width: 100%;
+}
+
+
+.movie-item {
+    width: 20%;
+    height: 40%;
+}
