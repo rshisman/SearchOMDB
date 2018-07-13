@@ -1,19 +1,25 @@
 .app-container {
+    padding: 50px;
     height: 100%;
     width: 100%;
 }
 
+.search-box {
+
+}
+
 .movies-container {
     display: flex;
-    justify-content:space-between;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
-    height: 80%;
+    height: 90%;
     width: 100%;
 }
 
 
 .movie-item {
-    width: 20%;
-    height: 40%;
+    flex: 1;
+    margin: 20px 20px;
+    width: 400px;
 }
