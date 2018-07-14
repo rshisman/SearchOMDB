@@ -1,37 +1,28 @@
 package com.example.movielocator.dm;
 
-import javax.persistence.*;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name="movies")
-public class Movie implements Serializable {
+public class OmdbMovieDTO implements Serializable {
 
     private static final long serialVersionUID = 436933635106433534L;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id")
     private Long id;
-
-    @Column(name="imdb_id")
     private String imdbID;
 
-    @Column(name="title")
+    @SerializedName("Title")
     private String title;
 
-    @Column(name="release_year")
+    @SerializedName("Year")
     private Integer year;
 
-    @Column(name="poster")
+    @SerializedName("Poster")
     private String poster;
 
-    private transient Boolean isFromDB = Boolean.TRUE;
-
-    public Movie(){}
-
-    public Movie(String imdbId, String title, Integer year, String poster) {
+    public OmdbMovieDTO(Long id, String imdbId, String title, Integer year, String poster) {
+        this.id = id;
         this.imdbID = imdbId;
         this.title = title;
         this.year = year;
@@ -58,19 +49,11 @@ public class Movie implements Serializable {
         return poster;
     }
 
-    public Boolean getFromDB() {
-        return isFromDB;
-    }
-
-    public void setFromDB(Boolean fromDB) {
-        isFromDB = fromDB;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Movie movie = (Movie) o;
+        OmdbMovieDTO movie = (OmdbMovieDTO) o;
         return Objects.equals(id, movie.id) &&
                 Objects.equals(imdbID, movie.imdbID) &&
                 Objects.equals(title, movie.title);

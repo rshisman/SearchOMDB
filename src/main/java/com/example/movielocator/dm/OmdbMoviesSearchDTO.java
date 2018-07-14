@@ -6,16 +6,16 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class MoviesSearchDTO implements Serializable {
+public class OmdbMoviesSearchDTO implements Serializable {
 
     @SerializedName("Search")
-    private final List<Movie> movies;
+    private final List<OmdbMovieDTO> movies;
 
-    public MoviesSearchDTO(List<Movie> search) {
+    public OmdbMoviesSearchDTO(List<OmdbMovieDTO> search) {
         this.movies = search;
     }
 
-    public List<Movie> getMovies() {
+    public List<OmdbMovieDTO> getMovies() {
         return Collections.unmodifiableList(movies);
     }
 }
