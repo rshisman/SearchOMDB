@@ -8,7 +8,7 @@ Vue.component('app-movies', {
             <input id="search-movie" class="col-sm-6" type="text" placeholder="Type to search...">
             <button @click="getMoviesByTitle()"  tabindex="0">Search Now</button>
         </div>
-        <typeahead v-model="movieModel" target="#search-movie" item-key="title" async-src="http://localhost:8080/api/movies?title="/>    
+        <typeahead v-model="movieModel" target="#search-movie" item-key="title" async-src="http://localhost:8080/api/movies/title/"/>    
         <br/>       
         <div class="movies-container">          
             <movie-overview v-for="currMovie in movies" v-if="isPresentableMovie(currMovie)" :key="currMovie.imdbID" :movie="currMovie"/>
@@ -36,7 +36,7 @@ Vue.component('app-movies', {
             return title;
         },
         getMoviesByTitle() {
-            let search = 'http://localhost:8080/api/movies?title=' + this.searchedTitle();
+            let search = 'http://localhost:8080/api/movies/title/' + this.searchedTitle();
             axios.get(search)
                 .then((response) => {
                     this.movies = response.data;

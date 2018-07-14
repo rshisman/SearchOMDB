@@ -4,9 +4,9 @@ Vue.component('movie-overview', {
         <a :id="movie.imdbID" v-tooltip.hover="getTooltipText()">
             <img :src="movie.poster" @click="onMovieClicked()"/>
         </a>      
-        <popover :title="movie.title" :target="'#'+movie.imdbID">
+        <popover :target="'#'+movie.imdbID">
           <template slot="popover">
-            <h1>{{movie.year}}</h1>
+            <movie-details :movieId="movie.id"></movie-details>
           </template>
         </popover>                 
     </div>`,
