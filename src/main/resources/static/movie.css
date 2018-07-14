@@ -1,7 +1,15 @@
 .app-container {
-    padding: 50px;
-    height: 100%;
+    background-color: black;
+    color: darkgrey;
+    padding: 10px;
     width: 100%;
+    display: inline-block;
+
+}
+
+.search-area {
+    padding: 20px;
+    width: 800px;
 }
 
 .search-box {
@@ -9,24 +17,29 @@
 }
 
 
-/* override bootstrap */
+/* override bootstrap's popover max-width */
 .popover {
-    position: absolute;
     width: 800px;
     height: 500px;
-    left: 500px!important;
-    top: 200px!important;
     max-width: 800px;
+}
+
+/* make the img size constant */
+.movie-item img, .popover img {
+    height: 442px;
+    width: 300px;
 }
 
 
 .movies-container {
+    border-color: darkgrey;
+    border-style: solid;
+    border-width: thin;
+
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
-    height: 90%;
-    width: 100%;
 }
 
 

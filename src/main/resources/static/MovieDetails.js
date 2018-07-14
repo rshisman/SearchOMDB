@@ -1,10 +1,11 @@
 Vue.component('movie-details', {
     template: `
-    <div v-if="movie !== undefined" class="movie-details row">   
-        <div id="poster" class="col-sm-6">    
+    <div class="movie-details row">   
+        <div  v-if="movie === undefined">Fetching data...</div>
+        <div v-if="movie !== undefined" id="poster" class="col-sm-6">    
              <img :src="movie.poster">           
         </div>        
-        <div id="info" class="form col-sm-6">   
+        <div v-if="movie !== undefined" id="info" class="form col-sm-6">   
             <h3 class="from-control">{{movie.title}}</h3>
             <h3 class="from-control">{{movie.releaseDate}}</h3>                   
         </div>  
