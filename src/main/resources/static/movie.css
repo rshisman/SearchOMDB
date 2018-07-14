@@ -12,16 +12,13 @@
     width: 800px;
 }
 
-.search-box {
-
-}
-
-
 /* override bootstrap's popover max-width */
 .popover {
     width: 800px;
     height: 500px;
     max-width: 800px;
+    background-color: dimgrey;
+    color: white;
 }
 
 /* make the img size constant */
@@ -47,4 +44,33 @@
     flex: 1;
     margin: 20px 20px;
     width: 400px;
+}
+
+.labelTD {
+    width: 25%;
+    text-align: left;
+    vertical-align: top;
+}
+
+.valueTD {
+    text-align: left;
+    vertical-align: top;
+}
+
+.detailsTable{
+    padding: 5px;
+    font-family: sans-serif;
+    color: white;
+}
+
+.detailsTitle{
+    font-family: sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.detailsDate{
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
 }
