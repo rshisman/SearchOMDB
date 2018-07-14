@@ -9,7 +9,6 @@ public class OmdbMovieDTO implements Serializable {
 
     private static final long serialVersionUID = 436933635106433534L;
 
-    private Long id;
     private String imdbID;
 
     @SerializedName("Title")
@@ -21,17 +20,6 @@ public class OmdbMovieDTO implements Serializable {
     @SerializedName("Poster")
     private String poster;
 
-    public OmdbMovieDTO(Long id, String imdbId, String title, Integer year, String poster) {
-        this.id = id;
-        this.imdbID = imdbId;
-        this.title = title;
-        this.year = year;
-        this.poster = poster;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public String getImdbID() {
         return imdbID;
@@ -53,14 +41,13 @@ public class OmdbMovieDTO implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OmdbMovieDTO movie = (OmdbMovieDTO) o;
-        return Objects.equals(id, movie.id) &&
-                Objects.equals(imdbID, movie.imdbID) &&
-                Objects.equals(title, movie.title);
+        OmdbMovieDTO that = (OmdbMovieDTO) o;
+        return Objects.equals(imdbID, that.imdbID) &&
+                Objects.equals(title, that.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, imdbID, title);
+        return Objects.hash(imdbID, title);
     }
 }

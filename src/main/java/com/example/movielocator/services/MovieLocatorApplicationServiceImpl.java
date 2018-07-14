@@ -1,13 +1,11 @@
 package com.example.movielocator.services;
 
 import com.example.movielocator.dao.MovieRepository;
-import com.example.movielocator.dm.Movie;
-import com.example.movielocator.dm.MovieLocatorConstants;
-import com.example.movielocator.dm.OmdbMovieDTO;
-import com.example.movielocator.dm.OmdbMoviesSearchDTO;
+import com.example.movielocator.dm.*;
 import com.example.movielocator.util.RESTApiResponse;
 import com.example.movielocator.util.RestApiInvoker;
 import com.google.gson.reflect.TypeToken;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -37,6 +35,41 @@ public class MovieLocatorApplicationServiceImpl implements MovieLocatorApplicati
         moviesByTitle = omdbMovieDTOS.stream().map(x-> getMovieFromOmdbMovie(x)).collect(Collectors.toList());
         movieRepository.saveAll(moviesByTitle);
         return moviesByTitle;
+    }
+
+    public Optional<MovieDetails> findMovieById(String id) {
+
+        Optional<Movie> movie = movieRepository.findById(Long.parseLong(id));
+        if(!movie.isPresent()){
+            return Optional.empty();
+        }
+
+        RestApiInvoker restApiInvoker = new RestApiInvoker();
+
+        //for example: http://www.omdbapi.com/?apikey=bb182d9e&i=tt2975590
+        String requestUrl = String.format(MovieLocatorConstants.OMDB_SERACH_MOVIE_BY_ID_URL, movie.get().getImdbID());
+
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+        RESTApiResponse<OmdbMovieDetailsDTO> restApiResponse = null;
+
+        try {
+            restApiResponse = restApiInvoker.httpGetForJson(requestUrl, headers, new TypeToken<OmdbMovieDetailsDTO>(){}.getType());
+            if(!restApiResponse.isSuccess()){
+                return Optional.empty();
+            }
+
+            if(!restApiResponse.getResultData().isPresent()){
+                return Optional.empty();
+            }
+
+            OmdbMovieDetailsDTO omdbMovieDetailsDTO = restApiResponse.getResultData().get();
+            ModelMapper modelMapper = new ModelMapper();
+            MovieDetails movieDetails = modelMapper.map(omdbMovieDetailsDTO, MovieDetails.class);
+            return Optional.ofNullable(movieDetails);
+
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
     private List<OmdbMovieDTO> searchMoviesInOmdb(String title){
