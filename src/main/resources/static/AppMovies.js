@@ -25,9 +25,6 @@ Vue.component('app-movies', {
             movies: []
         }
     },
-    mounted() {
-
-    },
     methods: {
         results() {
             let strPrefix = "There are no results ";
@@ -43,7 +40,8 @@ Vue.component('app-movies', {
             return (movie.poster !== "N/A");
         },
         searchedStr() {
-            // typeahead works in the following way if selected the exact move found the object then need to tkae the tile from it otherwise this is merely a string
+            // the 'typeahead' component works in the following way: if the user types something and clicks search - then the input model is a string.
+            // If the user selects a value from the autocomplete, then the input model is a movie object.
             let title = this.movieModel;
             if (this.isObject(this.movieModel)) {
                 title = this.movieModel.title;
@@ -57,7 +55,7 @@ Vue.component('app-movies', {
                 .then((response) => {
                     this.hasSearchResults = true;
                     this.lastSearchStr = this.searchedStr();
-                    // put in only movies which are valid (e.g with a poster)
+                    // put in only movies which are valid (with a poster)
                     response.data.forEach((movie) => {
                         if (this.isPresentableMovie(movie)) {
                             this.movies.push(movie);
