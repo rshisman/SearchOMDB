@@ -32,10 +32,7 @@
     border-color: darkgrey;
     border-style: solid;
     border-width: thin;
-
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
     flex-wrap: wrap;
 }
 
